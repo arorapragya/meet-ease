@@ -21,7 +21,6 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  google_fonts:
   flutter:
     sdk: flutter
 
@@ -30,6 +29,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^5.0.0
   shared_preferences:
+  speech_to_text: ^3.2.0
+  highlight_text: ^1.0.0
+  avatar_glow: ^2.0.1
 
 dev_dependencies:
   flutter_test:

@@ -1,30 +1,38 @@
 import 'package:flutter/material.dart';
-import "package:google_fonts/google_fonts.dart";
+import 'package:meet_ease/VoiceRecorder/speech_screen.dart';
+import 'ToDoList/Screens/tasks/tasks.dart';
 
-class GridDashboard extends StatelessWidget {
+class GridDashboard extends StatefulWidget {
+  @override
+  _GridDashboardState createState() => _GridDashboardState();
+}
+
+class _GridDashboardState extends State<GridDashboard> {
   Items item1 = new Items(
-      title: "Start Recording",
+      title: "Record",
       subtitle: "March, Wednesday",
       event: "3 Events",
-      img: "assets/mic.png");
+      img: "asset/mic.png");
 
   Items item2 = new Items(
-    title: "Notes",
+    title: "To Do List",
     subtitle: "Bocali, Apple",
     event: "4 Items",
-    img: "assets/notes.png",
+    img: "asset/notes.png",
   );
+
   Items item3 = new Items(
     title: "Upload",
     subtitle: "Lucy Mao going to Office",
     event: "",
-    img: "assets/upload.png",
+    img: "asset/upload.png",
   );
+
   Items item4 = new Items(
     title: "Calendar",
     subtitle: "Rose favirited your Post",
     event: "",
-    img: "assets/calendar.png",
+    img: "asset/calendar.png",
   );
 
   @override
@@ -39,50 +47,48 @@ class GridDashboard extends StatelessWidget {
           crossAxisSpacing: 18,
           mainAxisSpacing: 18,
           children: myList.map((data) {
-            return Container(
-              decoration: BoxDecoration(
-                  color: Color(color), borderRadius: BorderRadius.circular(10)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset(
-                    data.img,
-                    width: 42,
-                  ),
-                  SizedBox(
-                    height: 14,
-                  ),
-                  Text(
-                    data.title,
-                    style: GoogleFonts.openSans(
-                        textStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600)),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    data.subtitle,
-                    style: GoogleFonts.openSans(
-                        textStyle: TextStyle(
-                            color: Colors.white38,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600)),
-                  ),
-                  SizedBox(
-                    height: 14,
-                  ),
-                  Text(
-                    data.event,
-                    style: GoogleFonts.openSans(
-                        textStyle: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600)),
-                  ),
-                ],
+            print(data);
+            return GestureDetector(
+              onTap: () {
+                if (data.title.toLowerCase() == "to do list") {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return Tasks();
+                  }));
+                } else if (data.title.toLowerCase() == "record") {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return SpeechScreen();
+                  }));
+                }
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Color(color),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 14,
+                    ),
+                    Text(
+                      data.title,
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      data.subtitle,
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    Text(
+                      data.event,
+                    ),
+                  ],
+                ),
               ),
             );
           }).toList()),

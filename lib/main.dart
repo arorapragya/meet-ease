@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import "package:google_fonts/google_fonts.dart";
 
 //Pages
 import 'SideMenu/profile.dart';
@@ -59,10 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 IconButton(
                   alignment: Alignment.topCenter,
-                  icon: Image.asset(
-                    "assets/notification.png",
-                    width: 24,
-                  ),
+                  icon: Icon(Icons.notification_important),
                   onPressed: () {},
                 )
               ],
