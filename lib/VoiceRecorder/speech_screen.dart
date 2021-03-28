@@ -2,6 +2,8 @@ import "package:avatar_glow/avatar_glow.dart";
 import "package:flutter/material.dart";
 import "package:highlight_text/highlight_text.dart";
 import "package:speech_to_text/speech_to_text.dart" as stt;
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 class SpeechScreen extends StatefulWidget {
   @override
@@ -9,6 +11,26 @@ class SpeechScreen extends StatefulWidget {
 }
 
 class _SpeechScreenState extends State<SpeechScreen> {
+  Future<String> getFilePath() async {
+    Directory appDocumentsDirectory = await getApplicationDocumentsDirectory();
+    String appDocumentsPath = appDocumentsDirectory.path;
+    String filePath = '$appDocumentsPath/notes.txt';
+    return filePath;
+  }
+
+  void saveFile(note) async {
+    File file = File(await getFilePath());
+    file.writeAsString(note);
+    print(file);
+  }
+
+  void readFile() async {
+    File file = File(await getFilePath());
+    String fileContent = await file.readAsString();
+
+    print('File Content: $fileContent');
+  }
+  
   final Map<String, HighlightedWord> _highlights = {
     'flutter': HighlightedWord(
       onTap: () => print('flutter'),
@@ -79,18 +101,31 @@ class _SpeechScreenState extends State<SpeechScreen> {
       ),
       body: SingleChildScrollView(
         reverse: true,
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
-          child: TextHighlight(
-            text: _text,
-            words: _highlights,
-            enableCaseSensitive: true,
-            textStyle: const TextStyle(
-              fontSize: 32.0,
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
+              child: TextHighlight(
+                text: _text,
+                words: _highlights,
+                enableCaseSensitive: true,
+                textStyle: const TextStyle(
+                  fontSize: 32.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ),
-          ),
+            ElevatedButton(
+              onPressed: () {
+                saveFile(_text);
+                readFile();
+              },
+              child: Text("Save"),
+            )
+          ],
         ),
       ),
     );
