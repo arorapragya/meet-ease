@@ -8,6 +8,11 @@ class FeedbackPage extends StatefulWidget {
 class _FeedbackPageState extends State<FeedbackPage> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(appBar: new AppBar(title: new Text('Feedback')));
+    return new Scaffold(
+      appBar: new AppBar(title: new Text('Feedback')),
+      body: Text(
+          "All your views and opinions are valuable to us. Let us know what you think!"
+          "Our mail id - meetease21@gmail.com"),
+    );
   }
 }
