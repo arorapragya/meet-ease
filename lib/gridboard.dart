@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:meet_ease/Reminder/AllTask.dart';
+import 'package:meet_ease/Reminder/home.dart';
 import 'package:meet_ease/VoiceRecorder/speech_screen.dart';
+import 'Reminder/Arsip.dart';
+import 'Reminder/tambahTask.dart';
 import 'ToDoList/Screens/tasks/tasks.dart';
 
 class GridDashboard extends StatefulWidget {
@@ -10,27 +14,27 @@ class GridDashboard extends StatefulWidget {
 class _GridDashboardState extends State<GridDashboard> {
   Items item1 = new Items(
       title: "Record",
-      subtitle: "March, Wednesday",
-      event: "3 Events",
+      subtitle: "    Tap to convert your speech",
+      event: "into text ",
       img: "asset/mic.png");
 
   Items item2 = new Items(
     title: "To Do List",
-    subtitle: "Bocali, Apple",
-    event: "4 Items",
+    subtitle: " ",
+    event: " ",
     img: "asset/notes.png",
   );
 
   Items item3 = new Items(
     title: "Upload",
-    subtitle: "Lucy Mao going to Office",
+    subtitle: "",
     event: "",
     img: "asset/upload.png",
   );
 
   Items item4 = new Items(
-    title: "Calendar",
-    subtitle: "Rose favirited your Post",
+    title: "Reminder",
+    subtitle: "Hey there, what's your plan?",
     event: "",
     img: "asset/calendar.png",
   );
@@ -59,6 +63,14 @@ class _GridDashboardState extends State<GridDashboard> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
                     return SpeechScreen();
+                  }));
+                } else if (data.title.toLowerCase() == "reminder") {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return Reminder();
+
+                    //return '/addTask': (context) => MyHomePage(),
+                    //return '/archive';: (context) => MyArchive(),
                   }));
                 }
               },
